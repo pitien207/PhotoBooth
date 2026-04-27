@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A focused browser photo booth with color styles, photo counts, and sticker accessories."
+    />
+    <title>Photo Booth</title>
+    <link rel="stylesheet" href="./src/css/variables.css" />
+    <link rel="stylesheet" href="./src/css/base.css" />
+    <link rel="stylesheet" href="./src/css/layout.css" />
+    <link rel="stylesheet" href="./src/css/components.css" />
+    <link rel="stylesheet" href="./src/css/animations.css" />
+  </head>
+  <body class="is-capture-mode">
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy-block">
+          <h1>Photo Booth</h1>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel control-panel" aria-labelledby="controls-title">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Bang dieu khien</p>
+              <h2 id="controls-title">Chup anh</h2>
+              <p class="panel-intro">
+                Chon so anh, countdown va bat dau chup.
+              </p>
+            </div>
+          </div>
+
+          <div class="controls-stack">
+            <div class="button-row capture-control">
+              <button class="primary-button" id="startCameraButton" type="button">
+                Start Camera
+              </button>
+              <button
+                class="secondary-button"
+                id="switchCameraButton"
+                type="button"
+              >
+                Flip Camera
+              </button>
+            </div>
+
+            <div class="action-spotlight capture-control">
+              <p class="action-label">Chup anh</p>
+              <button class="primary-button accent-button action-hero" id="captureButton" type="button">
+                Take 4 Photos
+              </button>
+              <p class="action-hint">
+                Moi anh se dem nguoc theo thoi gian da chon.
+              </p>
+            </div>
+
+            <div class="button-row single-button-row edit-control">
+              <button class="ghost-button" id="retakeButton" type="button">
+                Back to Camera
+              </button>
+            </div>
+
+            <p class="status-chip is-warning" id="statusChip">
+              Camera is offline. Start it when you are ready.
+            </p>
+          </div>
+
+          <section class="control-group capture-control" aria-labelledby="photo-count-title">
+            <div class="section-copy">
+              <p class="panel-kicker">Buoc 1</p>
+              <h3 id="photo-count-title">So luong anh</h3>
+            </div>
+
+            <div class="option-grid photo-count-grid" id="photoCountGrid"></div>
+          </section>
+
+          <section class="control-group capture-control" aria-labelledby="countdown-title">
+            <div class="section-copy">
+              <p class="panel-kicker">Buoc 2</p>
+              <h3 id="countdown-title">Time countdown</h3>
+            </div>
+
+            <div class="option-grid countdown-grid" id="countdownGrid"></div>
+          </section>
+
+          <section class="control-group edit-control" aria-labelledby="styles-title">
+            <div class="section-copy">
+              <p class="panel-kicker">Edit 1</p>
+              <h3 id="styles-title">Chinh mau sac</h3>
+            </div>
+
+            <div class="option-grid style-grid" id="styleGrid"></div>
+          </section>
+
+          <section class="control-group edit-control" aria-labelledby="stickers-title">
+            <div class="section-copy">
+              <p class="panel-kicker">Edit 2</p>
+              <h3 id="stickers-title">Sticker phu kien</h3>
+            </div>
+
+            <div class="option-grid sticker-grid" id="stickerGrid"></div>
+          </section>
+        </section>
+
+        <section class="workspace">
+          <div class="panel live-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-kicker">Live stage</p>
+                <h2>Camera</h2>
+              </div>
+
+              <p class="stage-hint" id="stageHint">Start the camera to begin.</p>
+            </div>
+
+            <div class="stage-wrap">
+              <div class="stage-frame">
+                <video id="cameraPreview" autoplay playsinline muted></video>
+                <div class="video-fallback" id="videoFallback">
+                  Camera preview will appear here.
+                </div>
+                <div class="countdown" id="countdownOverlay" hidden>3</div>
+                <p class="shot-marker" id="shotMarker">Ready for shot 1 of 4</p>
+              </div>
+            </div>
+
+            <div class="tray-head">
+              <p class="tray-title">Anh da chup</p>
+              <p class="tray-copy">Slot se day len sau moi lan chup.</p>
+            </div>
+            <div class="shot-tray" id="shotTray" aria-live="polite"></div>
+          </div>
+
+          <div class="panel result-panel edit-control">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-kicker">Final print</p>
+                <h2 id="resultTitle">Your booth strip</h2>
+                <p class="result-helper">
+                  Doi mau hoac sticker roi tai ban in moi.
+                </p>
+              </div>
+
+              <button class="primary-button download-button" id="downloadButton" type="button" disabled>
+                Download PNG
+              </button>
+            </div>
+
+            <div class="result-stage">
+              <canvas id="resultCanvas" width="1200" height="2000"></canvas>
+              <div class="result-placeholder" id="resultPlaceholder">
+                <p>Chup anh, chinh mau, them sticker va tai ban in tai day.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+    </div>
+
+    <script type="module" src="./src/js/app.js"></script>
+  </body>
+</html>
