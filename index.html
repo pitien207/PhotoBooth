@@ -26,10 +26,10 @@
         <section class="panel control-panel" aria-labelledby="controls-title">
           <div class="panel-heading">
             <div>
-              <p class="panel-kicker">Bang dieu khien</p>
-              <h2 id="controls-title">Chup anh</h2>
+              <p class="panel-kicker">Controls</p>
+              <h2 id="controls-title">Capture</h2>
               <p class="panel-intro">
-                Chon so anh, countdown va bat dau chup.
+                Count, timer, camera, action.
               </p>
             </div>
           </div>
@@ -49,12 +49,12 @@
             </div>
 
             <div class="action-spotlight capture-control">
-              <p class="action-label">Chup anh</p>
+              <p class="action-label">Capture</p>
               <button class="primary-button accent-button action-hero" id="captureButton" type="button">
                 Take 4 Photos
               </button>
               <p class="action-hint">
-                Moi anh se dem nguoc theo thoi gian da chon.
+                Each frame follows the selected timer.
               </p>
             </div>
 
@@ -71,8 +71,8 @@
 
           <section class="control-group capture-control" aria-labelledby="photo-count-title">
             <div class="section-copy">
-              <p class="panel-kicker">Buoc 1</p>
-              <h3 id="photo-count-title">So luong anh</h3>
+              <p class="panel-kicker">Step 1</p>
+              <h3 id="photo-count-title">Photo Count</h3>
             </div>
 
             <div class="option-grid photo-count-grid" id="photoCountGrid"></div>
@@ -80,8 +80,8 @@
 
           <section class="control-group capture-control" aria-labelledby="countdown-title">
             <div class="section-copy">
-              <p class="panel-kicker">Buoc 2</p>
-              <h3 id="countdown-title">Time countdown</h3>
+              <p class="panel-kicker">Step 2</p>
+              <h3 id="countdown-title">Timer</h3>
             </div>
 
             <div class="option-grid countdown-grid" id="countdownGrid"></div>
@@ -90,7 +90,7 @@
           <section class="control-group edit-control" aria-labelledby="styles-title">
             <div class="section-copy">
               <p class="panel-kicker">Edit 1</p>
-              <h3 id="styles-title">Chinh mau sac</h3>
+              <h3 id="styles-title">Print Style</h3>
             </div>
 
             <div class="option-grid style-grid" id="styleGrid"></div>
@@ -99,7 +99,7 @@
           <section class="control-group edit-control" aria-labelledby="stickers-title">
             <div class="section-copy">
               <p class="panel-kicker">Edit 2</p>
-              <h3 id="stickers-title">Sticker phu kien</h3>
+              <h3 id="stickers-title">Stickers</h3>
             </div>
 
             <div class="option-grid sticker-grid" id="stickerGrid"></div>
@@ -129,8 +129,8 @@
             </div>
 
             <div class="tray-head">
-              <p class="tray-title">Anh da chup</p>
-              <p class="tray-copy">Slot se day len sau moi lan chup.</p>
+              <p class="tray-title">Captured Frames</p>
+              <p class="tray-copy">Filled after each shot.</p>
             </div>
             <div class="shot-tray" id="shotTray" aria-live="polite"></div>
           </div>
@@ -141,7 +141,7 @@
                 <p class="panel-kicker">Final print</p>
                 <h2 id="resultTitle">Your booth strip</h2>
                 <p class="result-helper">
-                  Doi mau hoac sticker roi tai ban in moi.
+                  Change the style or sticker, then download.
                 </p>
               </div>
 
@@ -153,7 +153,7 @@
             <div class="result-stage">
               <canvas id="resultCanvas" width="1200" height="2000"></canvas>
               <div class="result-placeholder" id="resultPlaceholder">
-                <p>Chup anh, chinh mau, them sticker va tai ban in tai day.</p>
+                <p>Your finished print will appear here.</p>
               </div>
             </div>
           </div>

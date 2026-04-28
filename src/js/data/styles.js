@@ -8,6 +8,14 @@ export const stylePresets = [
     accent: "#f7efe2",
     swatchBackground:
       "linear-gradient(135deg, rgba(255,255,255,0.24), rgba(255,205,149,0.22))",
+    printTheme: {
+      background: "#f6f3ec",
+      frameColor: "#ffffff",
+      borderColor: "rgba(28, 31, 36, 0.12)",
+      textColor: "#20242b",
+      mutedColor: "rgba(32, 36, 43, 0.68)",
+      accent: "#ff7a59",
+    },
     adjustments: {
       brightness: 1.02,
       contrast: 1.04,
@@ -30,6 +38,14 @@ export const stylePresets = [
     accent: "#d7d9dc",
     swatchBackground:
       "linear-gradient(135deg, rgba(255,255,255,0.18), rgba(145,151,161,0.28))",
+    printTheme: {
+      background: "#eceff3",
+      frameColor: "#fbfcfd",
+      borderColor: "rgba(28, 31, 36, 0.22)",
+      textColor: "#181b20",
+      mutedColor: "rgba(24, 27, 32, 0.66)",
+      accent: "#6b7280",
+    },
     adjustments: {
       brightness: 1.04,
       contrast: 1.32,
@@ -52,6 +68,14 @@ export const stylePresets = [
     accent: "#ffb487",
     swatchBackground:
       "linear-gradient(135deg, rgba(255,161,109,0.34), rgba(255,231,164,0.18))",
+    printTheme: {
+      background: "#fff1df",
+      frameColor: "#fffaf2",
+      borderColor: "rgba(255, 122, 89, 0.34)",
+      textColor: "#251820",
+      mutedColor: "rgba(37, 24, 32, 0.66)",
+      accent: "#ff7a59",
+    },
     adjustments: {
       brightness: 1.04,
       contrast: 1.09,
@@ -74,6 +98,14 @@ export const stylePresets = [
     accent: "#ff79ba",
     swatchBackground:
       "linear-gradient(135deg, rgba(255,112,167,0.28), rgba(121,222,255,0.22))",
+    printTheme: {
+      background: "#fff0f8",
+      frameColor: "#ffffff",
+      borderColor: "rgba(255, 121, 186, 0.5)",
+      textColor: "#211423",
+      mutedColor: "rgba(33, 20, 35, 0.66)",
+      accent: "#ff79ba",
+    },
     adjustments: {
       brightness: 1.05,
       contrast: 1.12,
@@ -96,6 +128,14 @@ export const stylePresets = [
     accent: "#f4d7ff",
     swatchBackground:
       "linear-gradient(135deg, rgba(255,225,246,0.28), rgba(211,237,255,0.22))",
+    printTheme: {
+      background: "#f4f7ff",
+      frameColor: "#ffffff",
+      borderColor: "rgba(158, 132, 255, 0.34)",
+      textColor: "#20242b",
+      mutedColor: "rgba(32, 36, 43, 0.62)",
+      accent: "#9e84ff",
+    },
     adjustments: {
       brightness: 1.1,
       contrast: 0.9,
@@ -118,6 +158,14 @@ export const stylePresets = [
     accent: "#6ff6ff",
     swatchBackground:
       "linear-gradient(135deg, rgba(106,246,255,0.22), rgba(255,90,208,0.24))",
+    printTheme: {
+      background: "#110d1f",
+      frameColor: "#171123",
+      borderColor: "rgba(114, 246, 255, 0.45)",
+      textColor: "#fff8ea",
+      mutedColor: "rgba(255, 248, 234, 0.72)",
+      accent: "#55dfc8",
+    },
     adjustments: {
       brightness: 1.02,
       contrast: 1.25,
@@ -134,6 +182,100 @@ export const stylePresets = [
         light: "#72f6ff",
         amount: 0.92,
       },
+    },
+  },
+  {
+    id: "teal-border",
+    name: "Teal Border",
+    label: "Clean color edge",
+    tagline: "Natural photos with a crisp teal print border.",
+    previewFilter: "contrast(1.06) saturate(1.12)",
+    accent: "#12b7a6",
+    swatchBackground:
+      "linear-gradient(135deg, rgba(18,183,166,0.3), rgba(255,255,255,0.18))",
+    printTheme: {
+      background: "#edf9f7",
+      frameColor: "#ffffff",
+      borderColor: "rgba(18, 183, 166, 0.62)",
+      textColor: "#16252a",
+      mutedColor: "rgba(22, 37, 42, 0.62)",
+      accent: "#12b7a6",
+      stripeColor: "#12b7a6",
+    },
+    adjustments: {
+      brightness: 1.02,
+      contrast: 1.06,
+      saturation: 1.12,
+      grayscale: 0,
+      sepia: 0,
+      tint: { r: -0.02, g: 0.04, b: 0.03, amount: 0.12 },
+      overlay: "none",
+      vignette: 0.07,
+      grain: 0.016,
+      scanlines: 0,
+    },
+  },
+  {
+    id: "cherry-border",
+    name: "Cherry Border",
+    label: "Bold red frame",
+    tagline: "A high-energy print with a red edge and vivid color.",
+    previewFilter: "contrast(1.08) saturate(1.24) brightness(1.03)",
+    accent: "#e93f5f",
+    swatchBackground:
+      "linear-gradient(135deg, rgba(233,63,95,0.32), rgba(255,209,102,0.18))",
+    printTheme: {
+      background: "#fff4f5",
+      frameColor: "#ffffff",
+      borderColor: "rgba(233, 63, 95, 0.62)",
+      textColor: "#24171d",
+      mutedColor: "rgba(36, 23, 29, 0.64)",
+      accent: "#e93f5f",
+      stripeColor: "#e93f5f",
+    },
+    adjustments: {
+      brightness: 1.03,
+      contrast: 1.08,
+      saturation: 1.24,
+      grayscale: 0,
+      sepia: 0.03,
+      tint: { r: 0.05, g: -0.01, b: 0, amount: 0.16 },
+      overlay: "candy",
+      vignette: 0.07,
+      grain: 0.018,
+      scanlines: 0,
+    },
+  },
+  {
+    id: "vintage-film-roll",
+    name: "Vintage Film Roll",
+    label: "Old film strip",
+    tagline: "Warm grain with black rails and sprocket holes.",
+    previewFilter: "sepia(0.32) contrast(1.16) saturate(0.78) brightness(1.03)",
+    accent: "#e6bd68",
+    swatchBackground:
+      "linear-gradient(135deg, rgba(16,16,16,0.9), rgba(230,189,104,0.34))",
+    printTheme: {
+      variant: "film-roll",
+      background: "#11100f",
+      frameColor: "#171514",
+      borderColor: "rgba(230, 189, 104, 0.5)",
+      textColor: "#f7ead5",
+      mutedColor: "rgba(247, 234, 213, 0.68)",
+      accent: "#e6bd68",
+      railColor: "#060606",
+    },
+    adjustments: {
+      brightness: 1.03,
+      contrast: 1.16,
+      saturation: 0.78,
+      grayscale: 0,
+      sepia: 0.38,
+      tint: { r: 0.1, g: 0.04, b: -0.04, amount: 0.22 },
+      overlay: "sunset",
+      vignette: 0.18,
+      grain: 0.055,
+      scanlines: 0.05,
     },
   },
 ];

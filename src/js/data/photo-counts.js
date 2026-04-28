@@ -2,8 +2,8 @@ export const photoCountOptions = [
   {
     id: "two-photos",
     name: "2 Photos",
-    label: "Nhanh gon",
-    description: "Hai khoanh khac cho mot ban in ngan.",
+    label: "Quick pair",
+    description: "Two frames for a compact print.",
     count: 2,
     accent: "#55dfc8",
     swatchBackground:
@@ -12,8 +12,8 @@ export const photoCountOptions = [
   {
     id: "three-photos",
     name: "3 Photos",
-    label: "Can bang",
-    description: "Ba anh de ban in vua mat.",
+    label: "Balanced",
+    description: "Three frames with a clean rhythm.",
     count: 3,
     accent: "#ffd166",
     swatchBackground:
@@ -22,8 +22,8 @@ export const photoCountOptions = [
   {
     id: "four-photos",
     name: "4 Photos",
-    label: "Day du",
-    description: "Bo bon anh photobooth co dien.",
+    label: "Classic set",
+    description: "A four-frame photo booth strip.",
     count: 4,
     accent: "#ff7a59",
     swatchBackground:

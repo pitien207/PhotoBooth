@@ -2,8 +2,8 @@ export const countdownOptions = [
   {
     id: "countdown-1",
     name: "1s",
-    label: "Nhanh",
-    description: "Chup gan nhu ngay lap tuc.",
+    label: "Fast",
+    description: "Almost instant.",
     seconds: 1,
     accent: "#55dfc8",
     swatchBackground:
@@ -12,8 +12,8 @@ export const countdownOptions = [
   {
     id: "countdown-3",
     name: "3s",
-    label: "Mac dinh",
-    description: "Co du thoi gian tao dang.",
+    label: "Default",
+    description: "Enough time to pose.",
     seconds: 3,
     accent: "#ffd166",
     swatchBackground:
@@ -22,8 +22,8 @@ export const countdownOptions = [
   {
     id: "countdown-5",
     name: "5s",
-    label: "Thoai mai",
-    description: "Them thoi gian chuan bi pose.",
+    label: "Relaxed",
+    description: "Extra time to get ready.",
     seconds: 5,
     accent: "#ff7a59",
     swatchBackground:

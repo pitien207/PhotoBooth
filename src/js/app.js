@@ -61,10 +61,10 @@ function updateViewMode() {
   const isEditMode = state.viewMode === "edit";
   document.body.classList.toggle("is-edit-mode", isEditMode);
   document.body.classList.toggle("is-capture-mode", !isEditMode);
-  elements.controlsTitle.textContent = isEditMode ? "Edit anh" : "Chup anh";
+  elements.controlsTitle.textContent = isEditMode ? "Edit" : "Capture";
   elements.panelIntro.textContent = isEditMode
-    ? "Chon style, sticker va tai ban in."
-    : "Chon so anh, countdown va bat dau chup.";
+    ? "Style, sticker, download."
+    : "Count, timer, camera, action.";
 }
 
 function restartCountdownAnimation() {
@@ -309,7 +309,7 @@ async function captureSequence() {
     applyPreviewStyle();
     setStatus(
       elements.statusChip,
-      "Edit mode is ready. Choose color style or sticker before downloading.",
+      "Edit mode is ready. Choose a print style or sticker before downloading.",
       "ok",
     );
     updateStageCopy("Back to Camera lets you capture a new set.");

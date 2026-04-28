@@ -48,6 +48,8 @@ function drawPhotoCard(context, photoCanvas, frame) {
     borderColor = "rgba(0, 0, 0, 0.08)",
     frameColor = "#ffffff",
     shadowColor = "rgba(0, 0, 0, 0.16)",
+    padding = 16,
+    strokeWidth = 2,
   } = frame;
 
   context.save();
@@ -63,12 +65,26 @@ function drawPhotoCard(context, photoCanvas, frame) {
   context.fillStyle = borderColor;
   roundedRectPath(context, x, y, width, height, radius);
   context.strokeStyle = borderColor;
-  context.lineWidth = 2;
+  context.lineWidth = strokeWidth;
   context.stroke();
 
-  roundedRectPath(context, x + 16, y + 16, width - 32, height - 32, radius - 10);
+  roundedRectPath(
+    context,
+    x + padding,
+    y + padding,
+    width - padding * 2,
+    height - padding * 2,
+    radius - 10,
+  );
   context.clip();
-  drawCoverImage(context, photoCanvas, x + 16, y + 16, width - 32, height - 32);
+  drawCoverImage(
+    context,
+    photoCanvas,
+    x + padding,
+    y + padding,
+    width - padding * 2,
+    height - padding * 2,
+  );
   context.restore();
 }
 
@@ -176,6 +192,244 @@ function drawTape(context, x, y, angle, color) {
   context.restore();
 }
 
+function drawRotatedLabel(context, text, x, y, width, height, angle, color, textColor) {
+  context.save();
+  context.translate(x, y);
+  context.rotate(angle);
+  roundedRectPath(context, -width / 2, -height / 2, width, height, 16);
+  context.fillStyle = color;
+  context.fill();
+  context.strokeStyle = "rgba(29, 21, 28, 0.16)";
+  context.lineWidth = 4;
+  context.stroke();
+  context.fillStyle = textColor;
+  context.font = `800 28px ${BODY_FONT}`;
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(text, 0, 2);
+  context.restore();
+}
+
+function drawBolt(context, x, y, scale, color) {
+  context.save();
+  context.translate(x, y);
+  context.scale(scale, scale);
+  context.beginPath();
+  context.moveTo(18, 0);
+  context.lineTo(-22, 54);
+  context.lineTo(8, 54);
+  context.lineTo(-12, 112);
+  context.lineTo(42, 40);
+  context.lineTo(10, 40);
+  context.closePath();
+  context.fillStyle = color;
+  context.fill();
+  context.restore();
+}
+
+function drawRing(context, x, y, radius, color, lineWidth = 8) {
+  context.save();
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI * 2);
+  context.strokeStyle = color;
+  context.lineWidth = lineWidth;
+  context.stroke();
+  context.restore();
+}
+
+function drawFlower(context, x, y, size, petalColor, centerColor) {
+  context.save();
+  context.translate(x, y);
+  for (let index = 0; index < 6; index += 1) {
+    const angle = (Math.PI * 2 * index) / 6;
+    context.beginPath();
+    context.ellipse(
+      Math.cos(angle) * size * 0.36,
+      Math.sin(angle) * size * 0.36,
+      size * 0.24,
+      size * 0.38,
+      angle,
+      0,
+      Math.PI * 2,
+    );
+    context.fillStyle = petalColor;
+    context.fill();
+  }
+
+  context.beginPath();
+  context.arc(0, 0, size * 0.2, 0, Math.PI * 2);
+  context.fillStyle = centerColor;
+  context.fill();
+  context.restore();
+}
+
+function drawLeaf(context, x, y, size, angle, color) {
+  context.save();
+  context.translate(x, y);
+  context.rotate(angle);
+  context.beginPath();
+  context.ellipse(0, 0, size * 0.32, size * 0.72, 0, 0, Math.PI * 2);
+  context.fillStyle = color;
+  context.fill();
+  context.strokeStyle = "rgba(29, 21, 28, 0.14)";
+  context.lineWidth = 4;
+  context.stroke();
+  context.restore();
+}
+
+function drawBurst(context, x, y, radius, fillColor, strokeColor) {
+  context.save();
+  context.translate(x, y);
+  context.beginPath();
+  for (let point = 0; point < 20; point += 1) {
+    const angle = -Math.PI / 2 + point * (Math.PI / 10);
+    const length = point % 2 === 0 ? radius : radius * 0.68;
+    const px = Math.cos(angle) * length;
+    const py = Math.sin(angle) * length;
+
+    if (point === 0) {
+      context.moveTo(px, py);
+    } else {
+      context.lineTo(px, py);
+    }
+  }
+
+  context.closePath();
+  context.fillStyle = fillColor;
+  context.fill();
+  context.strokeStyle = strokeColor;
+  context.lineWidth = 8;
+  context.stroke();
+  context.restore();
+}
+
+function drawSpeechBubble(context, text, x, y, width, height, fillColor, textColor) {
+  context.save();
+  roundedRectPath(context, x, y, width, height, 24);
+  context.fillStyle = fillColor;
+  context.fill();
+  context.beginPath();
+  context.moveTo(x + 58, y + height - 2);
+  context.lineTo(x + 34, y + height + 38);
+  context.lineTo(x + 104, y + height - 2);
+  context.closePath();
+  context.fill();
+  context.strokeStyle = "rgba(29, 21, 28, 0.18)";
+  context.lineWidth = 5;
+  context.stroke();
+  context.fillStyle = textColor;
+  context.font = `900 36px ${DISPLAY_FONT}`;
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(text, x + width / 2, y + height / 2 + 2);
+  context.restore();
+}
+
+function drawPostmark(context, x, y, radius, color) {
+  context.save();
+  context.strokeStyle = color;
+  context.lineWidth = 6;
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI * 2);
+  context.stroke();
+  context.beginPath();
+  context.arc(x, y, radius * 0.72, 0, Math.PI * 2);
+  context.stroke();
+  for (let index = 0; index < 4; index += 1) {
+    const lineY = y - 36 + index * 22;
+    context.beginPath();
+    context.moveTo(x + radius + 22, lineY);
+    context.lineTo(x + radius + 156, lineY - 12);
+    context.stroke();
+  }
+  context.restore();
+}
+
+function drawRibbon(context, x, y, width, height, angle, color) {
+  context.save();
+  context.translate(x, y);
+  context.rotate(angle);
+  context.fillStyle = color;
+  roundedRectPath(context, -width / 2, -height / 2, width, height, 8);
+  context.fill();
+  context.beginPath();
+  context.moveTo(width / 2 - 2, -height / 2);
+  context.lineTo(width / 2 + 44, -height / 2);
+  context.lineTo(width / 2 + 22, 0);
+  context.lineTo(width / 2 + 44, height / 2);
+  context.lineTo(width / 2 - 2, height / 2);
+  context.closePath();
+  context.fill();
+  context.beginPath();
+  context.moveTo(-width / 2 + 2, -height / 2);
+  context.lineTo(-width / 2 - 44, -height / 2);
+  context.lineTo(-width / 2 - 22, 0);
+  context.lineTo(-width / 2 - 44, height / 2);
+  context.lineTo(-width / 2 + 2, height / 2);
+  context.closePath();
+  context.fill();
+  context.restore();
+}
+
+function drawPixelBlock(context, x, y, units, unitSize, color) {
+  context.save();
+  context.fillStyle = color;
+  units.forEach(([column, row]) => {
+    context.fillRect(x + column * unitSize, y + row * unitSize, unitSize, unitSize);
+  });
+  context.restore();
+}
+
+function drawPixelHeart(context, x, y, unitSize, color) {
+  drawPixelBlock(
+    context,
+    x,
+    y,
+    [
+      [1, 0],
+      [2, 0],
+      [4, 0],
+      [5, 0],
+      [0, 1],
+      [3, 1],
+      [6, 1],
+      [0, 2],
+      [6, 2],
+      [1, 3],
+      [5, 3],
+      [2, 4],
+      [4, 4],
+      [3, 5],
+    ],
+    unitSize,
+    color,
+  );
+}
+
+function drawChromeBubble(context, x, y, radius, color) {
+  const gradient = context.createRadialGradient(
+    x - radius * 0.32,
+    y - radius * 0.36,
+    radius * 0.12,
+    x,
+    y,
+    radius,
+  );
+  gradient.addColorStop(0, "#ffffff");
+  gradient.addColorStop(0.28, color);
+  gradient.addColorStop(1, "rgba(31, 37, 46, 0.28)");
+
+  context.save();
+  context.beginPath();
+  context.arc(x, y, radius, 0, Math.PI * 2);
+  context.fillStyle = gradient;
+  context.fill();
+  context.strokeStyle = "rgba(255, 255, 255, 0.72)";
+  context.lineWidth = 5;
+  context.stroke();
+  context.restore();
+}
+
 function drawStickerDecor(context, width, height, stickerPack, accent) {
   if (!stickerPack || stickerPack.kind === "none") {
     return;
@@ -201,6 +455,136 @@ function drawStickerDecor(context, width, height, stickerPack, accent) {
     drawHeart(context, 126, height - 212, 72, "#ff7a59");
     drawTape(context, 176, 96, -0.16, "#8bf0a1");
     drawTape(context, width - 174, height - 98, 0.15, "#f4d7ff");
+    return;
+  }
+
+  if (stickerPack.kind === "date") {
+    const stampDate = new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+    }).format(new Date()).toUpperCase();
+
+    drawRotatedLabel(context, stampDate, width - 184, 128, 206, 68, 0.12, "#ffffff", "#2f5f9f");
+    drawPostmark(context, 164, height - 166, 58, "#2f5f9f");
+    drawBadge(context, "ARCHIVE", width - 302, height - 132, "#2f5f9f", "#fffaf2");
+    return;
+  }
+
+  if (stickerPack.kind === "labels") {
+    drawRotatedLabel(context, "GOOD TIMES", 188, 118, 244, 66, -0.12, "#e6bd68", "#1d151c");
+    drawRotatedLabel(context, "KEEP THIS", width - 190, height - 114, 214, 58, 0.1, "#fff4de", "#1d151c");
+    drawTape(context, width - 190, 104, 0.16, "#1d151c");
+    drawTape(context, 168, height - 92, -0.14, "#ff7a59");
+    return;
+  }
+
+  if (stickerPack.kind === "neon") {
+    context.save();
+    context.shadowColor = "#6ff6ff";
+    context.shadowBlur = 20;
+    drawRing(context, 152, height - 170, 54, "#6ff6ff", 9);
+    drawRing(context, 216, height - 118, 32, "#ff5ad0", 8);
+    drawBolt(context, width - 198, 106, 1.02, "#ffd166");
+    context.strokeStyle = "#ff5ad0";
+    context.lineWidth = 10;
+    context.lineCap = "round";
+    context.beginPath();
+    context.moveTo(width - 308, height - 148);
+    context.bezierCurveTo(width - 248, height - 210, width - 190, height - 82, width - 116, height - 144);
+    context.stroke();
+    context.restore();
+    return;
+  }
+
+  if (stickerPack.kind === "bloom") {
+    drawFlower(context, width - 156, 150, 92, "#ffb6d5", "#ffd166");
+    drawFlower(context, 132, height - 182, 78, "#fff4a3", "#3bb273");
+    drawLeaf(context, width - 240, 184, 78, -0.9, "#3bb273");
+    drawLeaf(context, 210, height - 164, 70, 0.86, "#8bf0a1");
+    drawLeaf(context, 118, height - 104, 54, -0.55, "#3bb273");
+    return;
+  }
+
+  if (stickerPack.kind === "comic") {
+    drawBurst(context, width - 164, 156, 88, "#ffd166", "#1d151c");
+    context.save();
+    context.fillStyle = "#1d151c";
+    context.font = `900 44px ${DISPLAY_FONT}`;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText("POP!", width - 164, 158);
+    context.restore();
+    drawSpeechBubble(context, "SNAP", 96, height - 238, 188, 82, "#ffffff", "#ff3f5f");
+    return;
+  }
+
+  if (stickerPack.kind === "travel") {
+    drawPostmark(context, width - 214, 152, 62, "#3b82f6");
+    drawRotatedLabel(context, "POSTCARD", 170, 128, 230, 62, -0.08, "#fff4de", "#2f5f9f");
+    drawBadge(context, "MOMENT", width - 304, height - 136, "#3b82f6", "#fffaf2");
+    drawRing(context, 150, height - 152, 46, "#f6bd38", 8);
+    return;
+  }
+
+  if (stickerPack.kind === "ribbon") {
+    drawRibbon(context, width - 206, 122, 230, 52, 0.18, "#b35cff");
+    drawRibbon(context, 174, height - 120, 244, 50, -0.14, "#12b7a6");
+    drawRotatedLabel(context, "XO", width - 160, height - 198, 96, 58, -0.1, "#fffaf2", "#b35cff");
+    return;
+  }
+
+  if (stickerPack.kind === "minimal") {
+    context.save();
+    context.strokeStyle = "rgba(31, 37, 46, 0.42)";
+    context.lineWidth = 4;
+    context.setLineDash([20, 16]);
+    roundedRectPath(context, 54, 54, width - 108, height - 108, 26);
+    context.stroke();
+    context.setLineDash([]);
+    context.fillStyle = accent;
+    [112, 154, 196].forEach((dotX) => {
+      context.beginPath();
+      context.arc(dotX, 126, 9, 0, Math.PI * 2);
+      context.fill();
+    });
+    [width - 112, width - 154, width - 196].forEach((dotX) => {
+      context.beginPath();
+      context.arc(dotX, height - 126, 9, 0, Math.PI * 2);
+      context.fill();
+    });
+    context.restore();
+    return;
+  }
+
+  if (stickerPack.kind === "pixel") {
+    drawPixelHeart(context, width - 238, 94, 18, "#ff3f5f");
+    drawPixelHeart(context, 112, height - 204, 14, "#12b7a6");
+    drawPixelBlock(
+      context,
+      width - 164,
+      height - 156,
+      [
+        [2, 0],
+        [2, 1],
+        [0, 2],
+        [1, 2],
+        [2, 2],
+        [3, 2],
+        [4, 2],
+        [2, 3],
+        [2, 4],
+      ],
+      16,
+      "#ffd166",
+    );
+    return;
+  }
+
+  if (stickerPack.kind === "chrome") {
+    drawChromeBubble(context, width - 164, 150, 58, "#9e84ff");
+    drawChromeBubble(context, width - 102, 238, 34, "#6ff6ff");
+    drawChromeBubble(context, 142, height - 174, 48, "#ff79ba");
+    drawRing(context, 218, height - 118, 42, "rgba(158, 132, 255, 0.72)", 7);
   }
 }
 
@@ -212,13 +596,39 @@ function drawFooterMeta(context, x, y, width, stylePreset, template) {
   }).format(new Date());
 
   context.save();
-  context.fillStyle = "rgba(28, 20, 26, 0.76)";
+  context.fillStyle = template.textColor ?? "rgba(28, 20, 26, 0.76)";
   context.font = `700 34px ${DISPLAY_FONT}`;
   context.fillText("PHOTOBOOTH", x, y);
-  context.fillStyle = "rgba(28, 20, 26, 0.7)";
+  context.fillStyle = template.mutedColor ?? "rgba(28, 20, 26, 0.7)";
   context.font = `600 24px ${BODY_FONT}`;
   context.fillText(`${stylePreset.name} / ${template.name}`, x, y + 46);
   context.fillText(createdOn, x, y + 84);
+  context.restore();
+}
+
+function drawFilmRails(context, width, height, template) {
+  const railWidth = 120;
+  const holeWidth = 48;
+  const holeHeight = 34;
+  const holeGap = 80;
+  const holeColor = "rgba(252, 239, 214, 0.86)";
+
+  context.save();
+  context.fillStyle = template.railColor ?? "#060606";
+  context.fillRect(0, 0, railWidth, height);
+  context.fillRect(width - railWidth, 0, railWidth, height);
+
+  context.fillStyle = holeColor;
+  for (let y = 88; y < height - 88; y += holeGap) {
+    roundedRectPath(context, 34, y, holeWidth, holeHeight, 8);
+    context.fill();
+    roundedRectPath(context, width - 82, y, holeWidth, holeHeight, 8);
+    context.fill();
+  }
+
+  context.strokeStyle = template.borderColor ?? "rgba(230, 189, 104, 0.5)";
+  context.lineWidth = 4;
+  context.strokeRect(136, 72, width - 272, height - 144);
   context.restore();
 }
 
@@ -226,21 +636,31 @@ function drawClassicStrip(context, width, height, photos, stylePreset, template,
   context.fillStyle = template.background;
   context.fillRect(0, 0, width, height);
 
-  context.fillStyle = "#1d151c";
-  context.fillRect(72, 72, 18, height - 144);
+  const isFilmRoll = template.variant === "film-roll";
+  const textColor = template.textColor ?? "#1d151c";
+  const mutedColor = template.mutedColor ?? "rgba(29, 21, 28, 0.68)";
+  const stripeColor = template.stripeColor ?? template.accent;
 
-  context.fillStyle = template.accent;
-  context.fillRect(108, 72, 10, height - 144);
+  if (isFilmRoll) {
+    drawFilmRails(context, width, height, template);
+  } else {
+    context.fillStyle = textColor;
+    context.fillRect(72, 72, 18, height - 144);
 
-  context.fillStyle = "#1d151c";
+    context.fillStyle = stripeColor;
+    context.fillRect(108, 72, 10, height - 144);
+  }
+
+  context.fillStyle = textColor;
   context.font = `900 110px ${DISPLAY_FONT}`;
-  context.fillText("PHOTOBOOTH", 152, 160);
+  context.fillText("PHOTOBOOTH", isFilmRoll ? 168 : 152, 160);
   context.font = `700 34px ${BODY_FONT}`;
-  context.fillText(`${photos.length} FRAMES / ONE PRINT`, 156, 205);
+  context.fillStyle = mutedColor;
+  context.fillText(`${photos.length} FRAMES / ONE PRINT`, isFilmRoll ? 172 : 156, 205);
 
   const top = 258;
   const bottom = 180;
-  const side = 136;
+  const side = isFilmRoll ? 174 : 136;
   const gap = 34;
   const cardHeight = (height - top - bottom - gap * (photos.length - 1)) / photos.length;
 
@@ -251,10 +671,12 @@ function drawClassicStrip(context, width, height, photos, stylePreset, template,
       y,
       width: width - side * 2,
       height: cardHeight,
-      radius: 30,
-      frameColor: "#fffaf2",
-      borderColor: "rgba(29, 21, 28, 0.08)",
-      shadowColor: "rgba(0, 0, 0, 0.18)",
+      radius: isFilmRoll ? 18 : 30,
+      frameColor: template.frameColor ?? "#fffaf2",
+      borderColor: template.borderColor ?? "rgba(29, 21, 28, 0.08)",
+      shadowColor: isFilmRoll ? "rgba(0, 0, 0, 0.34)" : "rgba(0, 0, 0, 0.18)",
+      padding: isFilmRoll ? 12 : 16,
+      strokeWidth: isFilmRoll ? 3 : 4,
     });
 
     drawBadge(
@@ -262,13 +684,13 @@ function drawClassicStrip(context, width, height, photos, stylePreset, template,
       `SHOT ${index + 1}`,
       width - side - 176,
       y + 24,
-      "rgba(29, 21, 28, 0.78)",
-      "#fff4de",
+      isFilmRoll ? template.accent : "rgba(29, 21, 28, 0.78)",
+      isFilmRoll ? "#171514" : "#fff4de",
     );
   });
 
   drawStickerDecor(context, width, height, stickerPack, template.accent);
-  drawFooterMeta(context, 154, height - 108, width - 308, stylePreset, template);
+  drawFooterMeta(context, isFilmRoll ? 170 : 154, height - 108, width - 308, stylePreset, template);
 }
 
 function drawNeonGrid(context, width, height, photos, stylePreset, template) {
@@ -408,12 +830,21 @@ function drawLayout(context, width, height, photos, stylePreset, template, stick
   drawClassicStrip(context, width, height, photos, stylePreset, template, stickerPack);
 }
 
-function createDynamicTemplate(photoCount) {
+function createDynamicTemplate(photoCount, stylePreset) {
+  const printTheme = stylePreset.printTheme ?? {};
+
   return {
     name: `${photoCount} Photo Print`,
     description: "A focused booth print sized to the selected photo count.",
-    accent: "#ff7a59",
-    background: "#f8f0e0",
+    variant: printTheme.variant ?? "classic",
+    accent: printTheme.accent ?? stylePreset.accent ?? "#ff7a59",
+    background: printTheme.background ?? "#f8f0e0",
+    frameColor: printTheme.frameColor ?? "#fffaf2",
+    borderColor: printTheme.borderColor ?? "rgba(29, 21, 28, 0.08)",
+    textColor: printTheme.textColor ?? "#1d151c",
+    mutedColor: printTheme.mutedColor ?? "rgba(29, 21, 28, 0.68)",
+    stripeColor: printTheme.stripeColor,
+    railColor: printTheme.railColor,
     canvas: {
       width: 1200,
       height: 900 + photoCount * 275,
@@ -447,7 +878,7 @@ export function captureRawFrame(videoElement, options = {}) {
 
 export function renderBoothPrint({ targetCanvas, shots, stylePreset, stickerPack }) {
   const photos = shots.map((shot) => createStyledCanvas(shot, stylePreset));
-  const template = createDynamicTemplate(photos.length);
+  const template = createDynamicTemplate(photos.length, stylePreset);
   targetCanvas.width = template.canvas.width;
   targetCanvas.height = template.canvas.height;
 
